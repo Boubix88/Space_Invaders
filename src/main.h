@@ -122,7 +122,7 @@ void menu(SDL_Event *event, world_t *world, ressources_t *ressources, SDL_Render
 void menu_fin(SDL_Event *event, world_t *world, ressources_t *ressources, SDL_Renderer *renderer);
 void Init_Sprite(sprite_t *sprite, int x, int y, int w, int h);
 void print_sprite(sprite_t *sprite);
-void init_data(world_t * world);
+void Init_Data();
 void clean_data(world_t *world);
 int is_game_over(world_t *world);
 void update_data(world_t *world);

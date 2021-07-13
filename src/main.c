@@ -9,20 +9,15 @@ int main(int argc, char* argv[])
     SDL_Event *event;
     SDL_Renderer *renderer;
 
-    world = malloc(sizeof(world_t));
-    ressources = malloc(sizeof(ressources_t));
-    
+    Init_Data();
+
     SDL_Init(SDL_INIT_VIDEO);
     Init_Screen(&ressources);
     Init_Spaceship(&ressources,&sprite, &world);
 
-    world->gameover = 0;
-    world->vy = 0;
-   
     printf("Valeur : %d\n",world->gameover);
    
-   
-    while (world->gameover == 0){
+    while (!is_game_over(world)){
         printf("Valeur 2 : %d\n", world->gameover);
         handle_events(event, world);
         //Update_Screen(ressources, world);

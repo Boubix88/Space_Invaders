@@ -1,0 +1,4 @@
+C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\mingw32-make.exe -f "C:\Users\yofer\OneDrive\Documents\Apprendre_le_C\SDL_test\Makefile" --dry-run --keep-going --print-directory
+'"C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin\mingw32-make.exe"' n'est pas reconnu en tant que commande interne
+ou externe, un programme ex�cutable ou un fichier de commandes.
+ 

@@ -1,0 +1,14 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode"
+}
+{
+    "configurations": [
+        {
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/bin",
+            ],
+    
+        }
+    ],
+}

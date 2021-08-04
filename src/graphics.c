@@ -98,15 +98,20 @@ void pause()
     }
 }
 
-void Free_Memory(){
 
-    ressources_t *ressources;
-    world_t *world;
+void Free_Texture(ressources_t *ressources, world_t *world){
     SDL_DestroyTexture(ressources->background);
     SDL_FreeSurface(ressources->backgroundIMG);
     SDL_FreeSurface(ressources->icon);
     SDL_DestroyRenderer(ressources->renderer);
     SDL_DestroyWindow(ressources->window);
+}
+
+void Free_Memory(){
+
+    ressources_t *ressources;
+    world_t *world;
+    Free_Texture(ressources, world);
     free(ressources);
     free(world);
 }

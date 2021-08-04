@@ -117,46 +117,48 @@ int test_collision (world_t *world){
  */
 
 void handle_events(SDL_Event *event,world_t *world){
+    
     //Uint32 *keystates;
     ressources_t* ressources;
     SDL_Renderer *renderer;
 
     while(SDL_PollEvent(event)){
-        //Si l'utilisateur a cliqué sur le X de la fenêtre
-        if( event->type == SDL_QUIT ) {
-            //On indique la fin du jeu
-            world->gameover = 1;
-        }
-       
-         //si une touche est appuyée
-         if(event->type == SDL_KEYDOWN){
-            //si la touche appuyée est 'D' 
-            if(event->key.keysym.sym == SDLK_d || event->key.keysym.sym == SDLK_RIGHT){
-                 printf("La touche D est appuyée\n");
-                 world->spaceship.x = world->spaceship.x + MOVING_STEP;
-              }
-            //si la touche appuyée est 'Q'
-            else if (event->key.keysym.sym == SDLK_q || event->key.keysym.sym ==SDLK_LEFT){
-                printf("La touche Q est appuyée\n");
-                world->spaceship.x = world->spaceship.x - MOVING_STEP;
-            }
-            //si la touche appuyée est 'Haut' ou 'Z'
-            else if (event->key.keysym.sym == SDLK_z || event->key.keysym.sym ==SDLK_UP){
-                printf("La touche Z est appuyée\n");
-                world->spaceship.y = world->spaceship.y - MOVING_STEP;
-            }
-            //si la touche appuyée est 'Bas' ou 'S'
-            else if (event->key.keysym.sym == SDLK_s || event->key.keysym.sym ==SDLK_DOWN){
-                printf("La touche S est appuyée\n");
-                world->spaceship.y = world->spaceship.y + MOVING_STEP;
-            }
-            //si la touche appuyée est 'Echap'
-            else if (event->key.keysym.sym == SDLK_ESCAPE){
-                printf("La touche ECHAP est appuyée\n");
+        switch(event->type) {
+            //si une touche est appuyée
+            case SDL_QUIT :
                 world->gameover = 1;
-                SDL_Quit();
-        
-            }
-         }
+
+            case SDL_KEYDOWN :
+                printf("Touche appuyee\n");
+                //si la touche appuyée est 'D' 
+                if(event->key.keysym.sym == SDLK_d || event->key.keysym.sym == SDLK_RIGHT){
+                    printf("La touche D est appuyee\n");
+                    world->spaceship.x = world->spaceship.x + MOVING_STEP;
+                }
+                //si la touche appuyée est 'Q'
+                if (event->key.keysym.sym == SDLK_q || event->key.keysym.sym ==SDLK_LEFT){
+                    printf("La touche Q est appuyee\n");
+                    world->spaceship.x = world->spaceship.x - MOVING_STEP;
+                }
+                //si la touche appuyée est 'Haut' ou 'Z'
+                if (event->key.keysym.sym == SDLK_z || event->key.keysym.sym ==SDLK_UP){
+                 printf("La touche Z est appuyee\n");
+                    world->spaceship.y = world->spaceship.y - MOVING_STEP;
+                }
+                //si la touche appuyée est 'Bas' ou 'S'
+                if (event->key.keysym.sym == SDLK_s || event->key.keysym.sym ==SDLK_DOWN){
+                    printf("La touche S est appuyee\n");
+                    world->spaceship.y = world->spaceship.y + MOVING_STEP;
+                }
+                //si la touche appuyée est 'Echap'
+                if (event->key.keysym.sym == SDLK_ESCAPE){
+                    printf("La touche ECHAP est appuyee\n");
+                    world->gameover = 1;
+                    SDL_Quit();
+                }
+                break;
+        }
     }
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
 }

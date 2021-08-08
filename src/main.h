@@ -42,18 +42,6 @@ struct ressources_s{
     SDL_Renderer* renderer;
     SDL_Texture* background; 
     SDL_Texture* spaceship;                       /*!< Texture liée à l'image du vaisseau. */
-    SDL_Texture* finish_line;   /*!< Texture liée a l'image de la ligne. */
-    SDL_Texture* meteor;
-    SDL_Texture* explosion;
-    SDL_Texture* confettis;
-    SDL_Texture* ballon;
-    SDL_Texture* start;
-    SDL_Texture* exit;
-    SDL_Texture* restart;
-    SDL_Texture* start_selection;
-    SDL_Texture* exit_selection;
-    SDL_Texture* restart_selection;
-    SDL_Color* couleur;
 };
 
 
@@ -117,32 +105,21 @@ void pause();
 void Free_Memory();
 void Update_Screen(ressources_t* ressources, world_t *world);
 void apply_sprite(SDL_Renderer *renderer, ressources_t *ressources, world_t *world);
+void Free_Texture(ressources_t *ressources, world_t *world);
+void Apply_Screen (ressources_t *ressources, world_t *world);
 
-void menu(SDL_Event *event, world_t *world, ressources_t *ressources, SDL_Renderer *renderer);
-void menu_fin(SDL_Event *event, world_t *world, ressources_t *ressources, SDL_Renderer *renderer);
 void Init_Sprite(sprite_t *sprite, int x, int y, int w, int h);
-void print_sprite(sprite_t *sprite);
 void Init_Data();
-void clean_data(world_t *world);
+
 int is_game_over(world_t *world);
 void update_data(world_t *world);
-void update_meteorite(world_t *world);
+
 void handle_events(SDL_Event *event,world_t *world);
-void clean(SDL_Window *window, SDL_Renderer * renderer, ressources_t *ressources, world_t * world);
-void init(SDL_Window **window, SDL_Renderer ** renderer, ressources_t *ressources, world_t * world);
+
 int handle_events_collision(sprite_t *sp1, sprite_t *sp2, world_t *world);
 int sprites_collide(sprite_t *sp1, sprite_t *sp2);
 void depassement_limite_gauche(sprite_t *sprite);
 void depassement_limite_droite(sprite_t *sprite);
 int test_collision (world_t *world);
-void init_ttf();
-
-void clean_textures(ressources_t *ressources);
-void init_textures(SDL_Renderer *renderer, ressources_t *ressources);
-void apply_mur_meteorite(SDL_Renderer *renderer, world_t *world, ressources_t *ressources);
-void apply_background(SDL_Renderer *renderer, ressources_t *ressources);
-void refresh_graphics(SDL_Renderer *renderer, world_t *world,ressources_t *ressources);
-int timer(world_t *world);
-int timer_menu(world_t *world);
 
 #endif

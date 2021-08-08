@@ -8,11 +8,6 @@
 
 #include "main.h"
 
-/*void Init_Icon(){
-    SDL_Surface* icon = SDL_LoadBMP("../ressources/space_invaders_logo.bmp"));
-    SDL_SetWindowIcon(sdlWindow, icon);
-}*/
-
 
 void Init_Sprite(sprite_t *sprite, int x, int y, int w, int h){
     sprite->x = x;
@@ -48,69 +43,59 @@ void Init_Spaceship(ressources_t *ressources, sprite_t *sprite, world_t *world){
     ressources->spaceship = SDL_CreateTextureFromSurface(ressources->renderer, ressources->spaceshipIMG);
     Init_Sprite(&world->spaceship, SCREEN_WIDTH/2 - 25, SCREEN_HEIGHT - 100, 50, 72);
 
-    Update_Screen(ressources, world);
-    //pause();
-    
-
-
+    Apply_Screen(ressources, world);
 }
+
 
 void apply_sprite(SDL_Renderer *renderer, ressources_t *ressources, world_t *world){
+    ressources->backgroundIMG=  SDL_LoadBMP("../ressources/space_light.bmp");
+    ressources->background = SDL_CreateTextureFromSurface(ressources->renderer, ressources->backgroundIMG);
 
-    SDL_Rect dst = {world->spaceship.x, world->spaceship.y, world->spaceship.w, world->spaceship.h};
-    SDL_SetRenderDrawColor(ressources->renderer, 0, 0, 0, 255); 
-    SDL_RenderClear(ressources->renderer);
-    SDL_RenderCopy(ressources->renderer, ressources->spaceship, NULL, &dst);
-    SDL_RenderPresent(ressources->renderer);
-
+    ressources->spaceshipIMG = SDL_LoadBMP("../ressources/spaceship.bmp");
+    ressources->spaceship = SDL_CreateTextureFromSurface(ressources->renderer, ressources->spaceshipIMG);
 }
 
 
-void Update_Screen(ressources_t* ressources, world_t *world){
+void Apply_Screen (ressources_t *ressources, world_t *world){
     SDL_Rect dst = {world->spaceship.x, world->spaceship.y, world->spaceship.w, world->spaceship.h};
-    SDL_SetRenderDrawColor(ressources->renderer, 0, 0, 0, 255); 
     SDL_RenderClear(ressources->renderer);
     SDL_RenderCopy(ressources->renderer, ressources->background, NULL, NULL);
     SDL_RenderCopy(ressources->renderer, ressources->spaceship, NULL, &dst);
     SDL_RenderPresent(ressources->renderer);
 }
 
-/*void display_sprite(SDL_Renderer *renderer, sprite_t *sprite, int x, int y)
-{
-    SDL_Rect dst = {x, y, sprite->w, sprite->h};
-    SDL_RenderCopy(renderer, sprite->texture, NULL, &dst);
-}*/
 
+void Update_Screen(ressources_t* ressources, world_t *world){
+    //SDL_FreeSurface(ressources->spaceshipIMG);
+    /*SDL_DestroyTexture(ressources->spaceship);
+    SDL_DestroyRenderer(ressources->renderer);*/
 
-void pause()
-{
-    int continuer = 1;
-    SDL_Event event;
- 
-    while (continuer)
-    {
-        SDL_WaitEvent(&event);
-        switch(event.type)
-        {
-            case SDL_QUIT:
-                continuer = 0;
-        }
-    }
+    SDL_Rect dst = {world->spaceship.x + 100, world->spaceship.y, world->spaceship.w, world->spaceship.h};
+
+    //ressources->spaceshipIMG = SDL_LoadBMP("../ressources/spaceship.bmp");
+    //ressources->spaceship = SDL_CreateTextureFromSurface(ressources->renderer, ressources->spaceshipIMG);
+    SDL_RenderClear(ressources->renderer);
+    SDL_RenderCopy(ressources->renderer, ressources->spaceship, NULL, &dst);
+    SDL_RenderPresent(ressources->renderer);
+    printf("Update\n");
 }
 
 
 void Free_Texture(ressources_t *ressources, world_t *world){
     SDL_DestroyTexture(ressources->background);
     SDL_FreeSurface(ressources->backgroundIMG);
-    SDL_FreeSurface(ressources->icon);
+    SDL_DestroyTexture(ressources->spaceship);
+    SDL_FreeSurface(ressources->spaceshipIMG);
     SDL_DestroyRenderer(ressources->renderer);
-    SDL_DestroyWindow(ressources->window);
 }
+
 
 void Free_Memory(){
 
     ressources_t *ressources;
     world_t *world;
+    SDL_FreeSurface(ressources->icon);
+    SDL_DestroyWindow(ressources->window);
     Free_Texture(ressources, world);
     free(ressources);
     free(world);

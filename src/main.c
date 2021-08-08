@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_VIDEO);
     Init_Screen(&ressources);
     Init_Spaceship(&ressources,&sprite, &world);
+    SDL_Delay(1000);
 
     while (world.gameover != 1){
         handle_events(&event, &world);

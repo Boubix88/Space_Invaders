@@ -3,22 +3,20 @@
 
 int main(int argc, char* argv[])
 {
-    ressources_t *ressources;
+    ressources_t ressources;
     sprite_t *sprite;
     world_t world;
     SDL_Event event;
-    SDL_Renderer *renderer;
-    world.gameover = 0;
     Init_Data();
 
     SDL_Init(SDL_INIT_VIDEO);
     Init_Screen(&ressources);
-    Init_Spaceship(&ressources,&sprite, &world);
-    SDL_Delay(1000);
+    Init_Spaceship(&ressources,sprite, &world);
+    SDL_Delay(10);
 
     while (world.gameover != 1){
         handle_events(&event, &world);
-        Update_Screen(ressources, &world);
+        Update_Screen(&ressources, &world);
         SDL_Delay(10);
     }
     Free_Memory();

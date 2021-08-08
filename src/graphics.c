@@ -25,12 +25,13 @@ void Init_Screen(ressources_t *ressources){
     ressources->renderer = SDL_CreateRenderer(ressources->window, -1, 0);
 
 
-    SDL_Surface *backgroundIMG=  SDL_LoadBMP("../ressources/space_light.bmp");
-    ressources->background = SDL_CreateTextureFromSurface(ressources->renderer, backgroundIMG);
+    ressources->backgroundIMG=  SDL_LoadBMP("../ressources/space_light.bmp");
+    ressources->background = SDL_CreateTextureFromSurface(ressources->renderer, ressources->backgroundIMG);
 
-    if (backgroundIMG == NULL){
+    if (ressources->backgroundIMG == NULL){
         printf("Erreur SDL2 : %s", SDL_GetError());
     }
+    SDL_FreeSurface(ressources->backgroundIMG);
 }
 
 
@@ -44,14 +45,21 @@ void Init_Spaceship(ressources_t *ressources, sprite_t *sprite, world_t *world){
     Init_Sprite(&world->spaceship, SCREEN_WIDTH/2 - 25, SCREEN_HEIGHT - 100, 50, 72);
 
     Apply_Screen(ressources, world);
+    SDL_FreeSurface(ressources->spaceshipIMG);
 }
 
 
 void apply_sprite(SDL_Renderer *renderer, ressources_t *ressources, world_t *world){
     ressources->backgroundIMG=  SDL_LoadBMP("../ressources/space_light.bmp");
+    if (ressources->backgroundIMG == NULL){
+        printf("Erreur SDL2 : %s", SDL_GetError());
+    }
     ressources->background = SDL_CreateTextureFromSurface(ressources->renderer, ressources->backgroundIMG);
 
     ressources->spaceshipIMG = SDL_LoadBMP("../ressources/spaceship.bmp");
+    if (ressources->spaceshipIMG == NULL){
+        printf("Erreur SDL2 : %s", SDL_GetError());
+    }
     ressources->spaceship = SDL_CreateTextureFromSurface(ressources->renderer, ressources->spaceshipIMG);
 }
 
@@ -65,19 +73,15 @@ void Apply_Screen (ressources_t *ressources, world_t *world){
 }
 
 
-void Update_Screen(ressources_t* ressources, world_t *world){
-    //SDL_FreeSurface(ressources->spaceshipIMG);
-    /*SDL_DestroyTexture(ressources->spaceship);
-    SDL_DestroyRenderer(ressources->renderer);*/
-
-    SDL_Rect dst = {world->spaceship.x + 100, world->spaceship.y, world->spaceship.w, world->spaceship.h};
-
-    //ressources->spaceshipIMG = SDL_LoadBMP("../ressources/spaceship.bmp");
-    //ressources->spaceship = SDL_CreateTextureFromSurface(ressources->renderer, ressources->spaceshipIMG);
+void Update_Screen(ressources_t *ressources, world_t *world){
+    SDL_Rect dst = {world->spaceship.x, world->spaceship.y, world->spaceship.w, world->spaceship.h};
     SDL_RenderClear(ressources->renderer);
+    SDL_RenderCopy(ressources->renderer, ressources->background, NULL, NULL);
     SDL_RenderCopy(ressources->renderer, ressources->spaceship, NULL, &dst);
     SDL_RenderPresent(ressources->renderer);
-    printf("Update\n");
+    if (ressources->spaceship == NULL){
+        printf("Erreur SDL2 : %s\n", SDL_GetError());
+    }
 }
 
 

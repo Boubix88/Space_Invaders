@@ -99,11 +99,11 @@ struct world_s{
  * \param world les données du monde
  */
 
-void Init_Spaceship();
-void Init_Screen();
+void Init_Spaceship(ressources_t *ressources, sprite_t *sprite, world_t *world);
+void Init_Screen(ressources_t *ressources);
 void pause();
 void Free_Memory();
-void Update_Screen(ressources_t* ressources, world_t *world);
+void Update_Screen(ressources_t *ressources, world_t *world);
 void apply_sprite(SDL_Renderer *renderer, ressources_t *ressources, world_t *world);
 void Free_Texture(ressources_t *ressources, world_t *world);
 void Apply_Screen (ressources_t *ressources, world_t *world);

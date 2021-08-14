@@ -7,19 +7,21 @@ int main(int argc, char* argv[])
     sprite_t *sprite;
     world_t world;
     SDL_Event event;
+
     Init_Data();
-    printf("Valeur : %d\n", world.gameover);
+    world.gameover = 0;
+    Init_Screen(&ressources);
     SDL_Init(SDL_INIT_VIDEO);
     //Init_Texture(&ressources);
-    //Menu(&event,&world,&ressources);
-    Init_Screen(&ressources);
+    Menu(&event,&world,&ressources);
+    Init_Background(&ressources);
     Init_Spaceship(&ressources,sprite, &world);
     SDL_Delay(10);
-    printf("Valeur 1: %d\n", world.gameover);
+
     while (world.gameover != 1){
-        //handle_events(&event, &world);
+        handle_events(&event, &world);
         Update_Screen(&ressources, &world);
-        //Update_Data(&ressources, &world);
+        Update_Data(&ressources, &world);
         printf("Valeur : %d\n", world.gameover);
         SDL_Delay(10);
     }

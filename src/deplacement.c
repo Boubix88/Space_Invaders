@@ -13,21 +13,6 @@ int is_game_over(world_t *world){
 }
 
 
-void Init_Data(){
-    ressources_t *ressources;
-    sprite_t *sprite;
-    world_t *world;
-    SDL_Event *event;
-    SDL_Renderer *renderer;
-
-    world = malloc(sizeof(world_t));
-    ressources = malloc(sizeof(ressources_t));
-
-    world->gameover = 0;
-    world->vy = 0;
-}
-
-
 /**
  * \brief La fonction test si le vaisseau dépasse le bord gauche (0), si c'est le cas il le déplace de +1
  * \param sprite Le vaisseau

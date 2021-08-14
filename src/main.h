@@ -40,12 +40,16 @@ struct ressources_s{
     SDL_Surface* spaceshipIMG;
     SDL_Surface* start_buttonIMG;
     SDL_Surface* exit_buttonIMG;
+    SDL_Surface* start_button_selectionIMG;
+    SDL_Surface* exit_button_selectionIMG;
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Texture* background; 
     SDL_Texture* spaceship;                       /*!< Texture liée à l'image du vaisseau. */
     SDL_Texture* start_button;
     SDL_Texture* exit_button;
+    SDL_Texture* start_button_selection;
+    SDL_Texture* exit_button_selection;
 };
 
 
@@ -106,6 +110,7 @@ struct world_s{
  */
 
 void Init_Spaceship(ressources_t *ressources, sprite_t *sprite, world_t *world);
+void Init_Background(ressources_t *ressources);
 void Init_Screen(ressources_t *ressources);
 void pause();
 void Free_Memory();
@@ -116,6 +121,9 @@ void Apply_Screen (ressources_t *ressources, world_t *world);
 void Update_Data(ressources_t *ressources, world_t *world);
 void Apply_Texture_Menu(ressources_t *ressources);
 void Menu(SDL_Event *event, world_t *world, ressources_t *ressources);
+void Apply_Start_Selection(ressources_t* ressources);
+void Apply_Exit_Selection(ressources_t* ressources);
+void Init_Texture_menu(ressources_t* ressources);
 
 void Init_Sprite(sprite_t *sprite, int x, int y, int w, int h);
 void Init_Data();

@@ -9,14 +9,6 @@
 #include "main.h"
 
 
-void Init_Sprite(sprite_t *sprite, int x, int y, int w, int h){
-    sprite->x = x;
-    sprite->y = y;
-    sprite->h = h;
-    sprite->w = w;
-}
-
-
 void Init_Screen(ressources_t *ressources){
 
     ressources->window = SDL_CreateWindow("Space Invaders",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,518, 920,SDL_WINDOW_SHOWN);
@@ -49,7 +41,19 @@ void Init_Spaceship(ressources_t *ressources, sprite_t *sprite, world_t *world){
 }
 
 
-void apply_sprite(SDL_Renderer *renderer, ressources_t *ressources, world_t *world){
+void Init_Texture(ressources_t *ressources){
+    ressources->start_buttonIMG=  SDL_LoadBMP("../ressources/start_button.bmp");
+    if (ressources->start_buttonIMG == NULL){
+        printf("Erreur SDL2 : %s", SDL_GetError());
+    }
+    ressources->start_button = SDL_CreateTextureFromSurface(ressources->renderer, ressources->start_buttonIMG);
+
+    ressources->exit_buttonIMG=  SDL_LoadBMP("../ressources/exit_button.bmp");
+    if (ressources->exit_buttonIMG == NULL){
+        printf("Erreur SDL2 : %s", SDL_GetError());
+    }
+    ressources->exit_button = SDL_CreateTextureFromSurface(ressources->renderer, ressources->exit_buttonIMG);
+
     ressources->backgroundIMG=  SDL_LoadBMP("../ressources/space_light.bmp");
     if (ressources->backgroundIMG == NULL){
         printf("Erreur SDL2 : %s", SDL_GetError());
@@ -73,15 +77,21 @@ void Apply_Screen (ressources_t *ressources, world_t *world){
 }
 
 
+void Apply_Texture_Menu(ressources_t *ressources){
+    SDL_Rect dst_start = {109, 300, 300, 143};
+    SDL_Rect dst_exit = {109, 450, 300, 143};
+    SDL_RenderClear(ressources->renderer);
+    SDL_RenderCopy(ressources->renderer, ressources->start_button, NULL, &dst_start);
+    SDL_RenderCopy(ressources->renderer, ressources->exit_button, NULL, &dst_exit);
+    SDL_RenderPresent(ressources->renderer);
+}
+
 void Update_Screen(ressources_t *ressources, world_t *world){
     SDL_Rect dst = {world->spaceship.x, world->spaceship.y, world->spaceship.w, world->spaceship.h};
     SDL_RenderClear(ressources->renderer);
     SDL_RenderCopy(ressources->renderer, ressources->background, NULL, NULL);
     SDL_RenderCopy(ressources->renderer, ressources->spaceship, NULL, &dst);
     SDL_RenderPresent(ressources->renderer);
-    if (ressources->spaceship == NULL){
-        printf("Erreur SDL2 : %s\n", SDL_GetError());
-    }
 }
 
 

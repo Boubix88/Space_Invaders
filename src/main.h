@@ -38,10 +38,14 @@ struct ressources_s{
     SDL_Surface* icon;
     SDL_Surface* backgroundIMG;
     SDL_Surface* spaceshipIMG;
+    SDL_Surface* start_buttonIMG;
+    SDL_Surface* exit_buttonIMG;
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Texture* background; 
     SDL_Texture* spaceship;                       /*!< Texture liée à l'image du vaisseau. */
+    SDL_Texture* start_button;
+    SDL_Texture* exit_button;
 };
 
 
@@ -89,6 +93,8 @@ typedef struct world_s world_t;
 struct world_s{
     int gameover; 
     int vy;
+    int selection;
+    int nbr;
     sprite_t spaceship;
 };
 
@@ -104,15 +110,17 @@ void Init_Screen(ressources_t *ressources);
 void pause();
 void Free_Memory();
 void Update_Screen(ressources_t *ressources, world_t *world);
-void apply_sprite(SDL_Renderer *renderer, ressources_t *ressources, world_t *world);
+void Init_Texture(ressources_t *ressources);
 void Free_Texture(ressources_t *ressources, world_t *world);
 void Apply_Screen (ressources_t *ressources, world_t *world);
+void Update_Data(ressources_t *ressources, world_t *world);
+void Apply_Texture_Menu(ressources_t *ressources);
+void Menu(SDL_Event *event, world_t *world, ressources_t *ressources);
 
 void Init_Sprite(sprite_t *sprite, int x, int y, int w, int h);
 void Init_Data();
 
 int is_game_over(world_t *world);
-void update_data(world_t *world);
 
 void handle_events(SDL_Event *event,world_t *world);
 

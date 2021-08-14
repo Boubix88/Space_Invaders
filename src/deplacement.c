@@ -12,6 +12,7 @@ int is_game_over(world_t *world){
     return world->gameover;
 }
 
+
 void Init_Data(){
     ressources_t *ressources;
     sprite_t *sprite;
@@ -26,12 +27,13 @@ void Init_Data(){
     world->vy = 0;
 }
 
+
 /**
  * \brief La fonction test si le vaisseau dépasse le bord gauche (0), si c'est le cas il le déplace de +1
  * \param sprite Le vaisseau
  */
 
-/*void depassement_limite_gauche(sprite_t *sprite){
+void depassement_limite_gauche(sprite_t *sprite){
     
     if ((sprite->x - SHIP_WIDTH/2 + 10) < 0){
         sprite->x = sprite->x + 1;
@@ -44,13 +46,13 @@ void Init_Data(){
  * \brief La fonction test si le vaisseau dépasse le bord gauche (300), si c'est le cas il le déplace de -1
  * \param sprite Le vaisseau
  */
-/*
+
 void depassement_limite_droite(sprite_t *sprite){
 
-    if ((sprite->x + SHIP_WIDTH + 10) > 300){
+    if ((sprite->x + SHIP_WIDTH + 10) > 518){
         sprite->x = sprite->x - 1;
     }
-}*/
+}
 
 
 

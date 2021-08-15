@@ -32,6 +32,7 @@ void Update_Data(ressources_t *ressources, world_t *world){
 
 void Menu(SDL_Event *event, world_t *world, ressources_t *ressources){
     Init_Texture_menu(ressources);
+    Apply_Texture_Menu(ressources);
     Uint8 *keystates;
     while (world->nbr != 1){
         while( SDL_PollEvent( event ) ) {
@@ -40,12 +41,12 @@ void Menu(SDL_Event *event, world_t *world, ressources_t *ressources){
                 //La touche HAUT est appuyée 
                 if (event->key.keysym.sym == SDLK_UP){
                     world->selection = 1;
-                    //Apply_Start_Selection(ressources);
+                    Apply_Start_Selection(ressources);
                 }
                 //La touche BAS est appuyée 
                 else if (event->key.keysym.sym == SDLK_DOWN){
                     world->selection = 2;
-                    //Apply_Exit_Selection(ressources);
+                    Apply_Exit_Selection(ressources);
                 }
                 //La touche entrée est appuyée et selection est à 2
                 else if (event->key.keysym.sym == SDLK_RETURN && world->selection == 2){
@@ -62,9 +63,6 @@ void Menu(SDL_Event *event, world_t *world, ressources_t *ressources){
                     world->nbr = 1;
                     world->selection = 2;
                 }
-            }
-            else if(event->type != SDL_KEYDOWN){
-                Apply_Texture_Menu(ressources);
             }
             else if( event->type == SDL_QUIT ) {
                     //On indique la fin du jeu si on clique sur la croix

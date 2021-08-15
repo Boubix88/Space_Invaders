@@ -12,9 +12,8 @@ int main(int argc, char* argv[])
     world.gameover = 0;
     Init_Screen(&ressources);
     SDL_Init(SDL_INIT_VIDEO);
-    //Init_Texture(&ressources);
+    Init_Texture(&ressources);
     Menu(&event,&world,&ressources);
-    Init_Background(&ressources);
     Init_Spaceship(&ressources,sprite, &world);
     SDL_Delay(10);
 

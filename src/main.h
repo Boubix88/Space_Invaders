@@ -42,6 +42,8 @@ struct ressources_s{
     SDL_Surface* exit_buttonIMG;
     SDL_Surface* start_button_selectionIMG;
     SDL_Surface* exit_button_selectionIMG;
+    SDL_Surface* ammo_leftIMG;
+    SDL_Surface* ammo_rightIMG;
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Texture* background; 
@@ -50,6 +52,8 @@ struct ressources_s{
     SDL_Texture* exit_button;
     SDL_Texture* start_button_selection;
     SDL_Texture* exit_button_selection;
+    SDL_Texture* ammo_left;
+    SDL_Texture* ammo_right;
 };
 
 

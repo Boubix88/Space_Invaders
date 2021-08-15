@@ -143,6 +143,11 @@ void handle_events(SDL_Event *event,world_t *world){
                     world->gameover = 1;
                     SDL_Quit();
                 }
+                //si la touche appuyée est 'espace'
+                if (event->key.keysym.sym == SDLK_SPACE){
+                    printf("La touche ESPACE est appuyee\n");
+                    
+                }
                 break;
         }
     }

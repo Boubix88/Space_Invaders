@@ -30,11 +30,6 @@ void Init_Background(ressources_t *ressources){
 
 void Init_Spaceship(ressources_t *ressources, sprite_t *sprite, world_t *world){
 
-    ressources->spaceshipIMG = SDL_LoadBMP("../ressources/spaceship.bmp");
-    if (ressources->spaceshipIMG == NULL){
-        printf("Erreur SDL2 : %s", SDL_GetError());
-    }
-    ressources->spaceship = SDL_CreateTextureFromSurface(ressources->renderer, ressources->spaceshipIMG);
     Init_Sprite(&world->spaceship, SCREEN_WIDTH/2 - 25, SCREEN_HEIGHT - 100, 50, 72);
 
     Apply_Screen(ressources, world);
@@ -66,6 +61,18 @@ void Init_Texture(ressources_t *ressources){
         printf("Erreur SDL2 : %s", SDL_GetError());
     }
     ressources->spaceship = SDL_CreateTextureFromSurface(ressources->renderer, ressources->spaceshipIMG);
+
+    ressources->ammo_leftIMG = SDL_LoadBMP("../ressources/ammo.bmp");
+    if (ressources->ammo_leftIMG == NULL){
+        printf("Erreur SDL2 : %s", SDL_GetError());
+    }
+    ressources->ammo_left = SDL_CreateTextureFromSurface(ressources->renderer, ressources->ammo_leftIMG);
+
+    ressources->ammo_rightIMG = SDL_LoadBMP("../ressources/spaceship.bmp");
+    if (ressources->ammo_rightIMG == NULL){
+        printf("Erreur SDL2 : %s", SDL_GetError());
+    }
+    ressources->ammo_right = SDL_CreateTextureFromSurface(ressources->renderer, ressources->ammo_leftIMG);
 }
 
 
@@ -88,17 +95,17 @@ void Init_Texture_menu(ressources_t* ressources){
     }
     ressources->exit_button = SDL_CreateTextureFromSurface(ressources->renderer, ressources->exit_buttonIMG);
 
-    ressources->start_button_selectionIMG=  SDL_LoadBMP("../ressources/start_button.bmp");
+    ressources->start_button_selectionIMG=  SDL_LoadBMP("../ressources/start_button_selection.bmp");
     if (ressources->start_button_selectionIMG == NULL){
         printf("Erreur SDL2 : %s", SDL_GetError());
     }
     ressources->start_button_selection = SDL_CreateTextureFromSurface(ressources->renderer, ressources->start_button_selectionIMG);
 
-    ressources->exit_button_selectionIMG=  SDL_LoadBMP("../ressources/exit_button.bmp");
+    ressources->exit_button_selectionIMG=  SDL_LoadBMP("../ressources/exit_button_selection.bmp");
     if (ressources->exit_button_selectionIMG == NULL){
         printf("Erreur SDL2 : %s", SDL_GetError());
     }
-    ressources->exit_button = SDL_CreateTextureFromSurface(ressources->renderer, ressources->exit_button_selectionIMG);
+    ressources->exit_button_selection = SDL_CreateTextureFromSurface(ressources->renderer, ressources->exit_button_selectionIMG);
 }
 
 

@@ -9,31 +9,37 @@ void Init_Sprite(sprite_t *sprite, int x, int y, int w, int h){
 }
 
 
+void Init_Ammo(ressources_t* ressources, world_t* world){
+    Init_Sprite(&world->ammo_left, world->spaceship.x - 18, world->spaceship.y - 9, AMMO_WIDTH, AMMO_HEIGHT);
+    Init_Sprite(&world->ammo_right, world->spaceship.x + 18, world->spaceship.y - 9, AMMO_WIDTH, AMMO_HEIGHT);
+}
+
+
 void Init_Data(){
     ressources_t *ressources;
-    sprite_t *sprite;
     world_t *world;
-    SDL_Event *event;
-    SDL_Renderer *renderer;
 
     world = malloc(sizeof(world_t));
     ressources = malloc(sizeof(ressources_t));
 
     world->gameover = 0;
-    world->vy = 0;
+    world->vy = 10;
+
+    //Init_Ammo(ressources, world);
 }
 
 
 void Update_Data(ressources_t *ressources, world_t *world){
     depassement_limite_gauche(&world->spaceship);
     depassement_limite_droite(&world->spaceship);
+    world->ammo_left.y = world->ammo_left.y - world->vy;
+    world->ammo_right.y = world->ammo_right.y - world->vy;
 }
 
 
 void Menu(SDL_Event *event, world_t *world, ressources_t *ressources){
     Init_Texture_menu(ressources);
     Apply_Texture_Menu(ressources);
-    Uint8 *keystates;
     while (world->nbr != 1){
         while( SDL_PollEvent( event ) ) {
             //Si une touche est appuyée

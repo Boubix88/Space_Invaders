@@ -104,10 +104,7 @@ int test_collision (world_t *world){
  */
 
 void handle_events(SDL_Event *event,world_t *world){
-    
-    //Uint32 *keystates;
     ressources_t* ressources;
-    SDL_Renderer *renderer;
 
     while(SDL_PollEvent(event)){
         switch(event->type) {
@@ -137,20 +134,18 @@ void handle_events(SDL_Event *event,world_t *world){
                     printf("La touche S est appuyee\n");
                     world->spaceship.y = world->spaceship.y + MOVING_STEP;
                 }
+                //si la touche appuyée est 'espace'
+                if (event->key.keysym.sym == SDLK_SPACE){
+                    printf("La touche ESPACE est appuyee\n");
+                    Apply_Ammo(ressources, world);
+                }
                 //si la touche appuyée est 'Echap'
                 if (event->key.keysym.sym == SDLK_ESCAPE){
                     printf("La touche ECHAP est appuyee\n");
                     world->gameover = 1;
                     SDL_Quit();
                 }
-                //si la touche appuyée est 'espace'
-                if (event->key.keysym.sym == SDLK_SPACE){
-                    printf("La touche ESPACE est appuyee\n");
-                    
-                }
                 break;
         }
     }
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
 }

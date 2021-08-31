@@ -1,22 +1,21 @@
-CFLAGS = -O3 `sdl2-config --cflags`
-LDFLAGS = -I include -L lib -lmingw32 -lSDL2main -lSDL2
+CXXFLAGS = -Wall
+SDL_FLAGS = -I include -L lib -lmingw32 -lSDL2main -lSDL2
 
 INC = main.h 
-SRC = main.c graphics.c deplacement.c
+SRC = main.c world.c graphics.c deplacement.c
 OBJ = $(SRC:%.c=%.o)
 
 PROG = ../bin/test
 
 %.o: %.c $(INC)
-	gcc $(CFLAGS) -c $<
+	gcc $(CXXLAGS) -c $<
 
 test: $(OBJ)
-	gcc $(CFLAGS) $(OBJ) $(LDFLAGS) -o $@
+	gcc $(CXXLAGS) $(OBJ) $(SDL_FLAGS) -o $@
 
 doc: $(PROG)
 	doxygen ./$(PROG)
 	make -C latex
 
 clean:
-	rm -f *~ *.o $(PROG)
-	rm -rf latex html
+	rm -f PROG *.o 

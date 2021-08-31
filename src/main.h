@@ -14,6 +14,8 @@
 #define SHIP_HEIGHT 72
 #define SHIP_WIDTH 50
 #define MOVING_STEP 10
+#define AMMO_HEIGHT 20
+#define AMMO_WIDTH 8
 
 /**
  * \brief Type qui correspond aux ressources du jeu
@@ -104,6 +106,8 @@ struct world_s{
     int selection;
     int nbr;
     sprite_t spaceship;
+    sprite_t ammo_left;
+    sprite_t ammo_right;
 };
 
 
@@ -128,6 +132,8 @@ void Menu(SDL_Event *event, world_t *world, ressources_t *ressources);
 void Apply_Start_Selection(ressources_t* ressources);
 void Apply_Exit_Selection(ressources_t* ressources);
 void Init_Texture_menu(ressources_t* ressources);
+void Init_Ammo(ressources_t* ressources, world_t* world);
+void Apply_Ammo(ressources_t *ressources, world_t *world);
 
 void Init_Sprite(sprite_t *sprite, int x, int y, int w, int h);
 void Init_Data();

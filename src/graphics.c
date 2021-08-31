@@ -68,7 +68,7 @@ void Init_Texture(ressources_t *ressources){
     }
     ressources->ammo_left = SDL_CreateTextureFromSurface(ressources->renderer, ressources->ammo_leftIMG);
 
-    ressources->ammo_rightIMG = SDL_LoadBMP("../ressources/spaceship.bmp");
+    ressources->ammo_rightIMG = SDL_LoadBMP("../ressources/ammo.bmp");
     if (ressources->ammo_rightIMG == NULL){
         printf("Erreur SDL2 : %s", SDL_GetError());
     }
@@ -114,6 +114,16 @@ void Apply_Screen (ressources_t *ressources, world_t *world){
     SDL_RenderClear(ressources->renderer);
     SDL_RenderCopy(ressources->renderer, ressources->background, NULL, NULL);
     SDL_RenderCopy(ressources->renderer, ressources->spaceship, NULL, &dst);
+    SDL_RenderPresent(ressources->renderer);
+}
+
+
+void Apply_Ammo(ressources_t *ressources, world_t *world){
+    SDL_Rect dst_left = {world->ammo_left.x, world->ammo_left.y, AMMO_WIDTH, AMMO_HEIGHT};
+    SDL_Rect dst_right = {world->ammo_right.x, world->ammo_right.y, AMMO_WIDTH, AMMO_HEIGHT};
+    SDL_RenderClear(ressources->renderer);
+    SDL_RenderCopy(ressources->renderer, ressources->ammo_left, NULL, &dst_left);
+    SDL_RenderCopy(ressources->renderer, ressources->ammo_right, NULL, &dst_right);
     SDL_RenderPresent(ressources->renderer);
 }
 
